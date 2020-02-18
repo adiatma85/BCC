@@ -15,6 +15,9 @@ Router.use(express.static(path.join(__dirname,'items')))
 
 var id
 
+//Get AllItem
+Router.get('/search_for_items')
+
 // Adding Item
 Router.get('/add_items',(req,res,next)=>{
     if(req.session.Success){
@@ -42,6 +45,8 @@ Router.post('/add_items',(req,res,next)=>{
 },ItemsController.add_item)
 
 //Search For Items
-Router.get('/search_for_items')
+// Router.get('/search_for_items',(req,res,next)={
+
+// })
 
 module.exports=Router

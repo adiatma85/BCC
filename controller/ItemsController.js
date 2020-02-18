@@ -21,6 +21,10 @@ var sess;
 // After Pre-Config
 
 //Adding Item
+
+const getAllItem=async ()=>{
+    await db.query('select * from')
+}
 const add_item=async (req,res,next)=>{
     const item_name=req.body.item_name
     const item_desc=req.body.item_desc
