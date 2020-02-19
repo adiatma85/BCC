@@ -22,8 +22,10 @@ var sess;
 
 //Adding Item
 
-const getAllItem=async ()=>{
-    await db.query('select * from')
+const getAllItem=async (req,res,next)=>{
+    const [item_get]=await db.query('select * from items WHERE item_status=?',[0])
+    res.locals.Items=item_get
+    next()
 }
 const add_item=async (req,res,next)=>{
     const item_name=req.body.item_name
@@ -64,5 +66,6 @@ const SearchForItem=(req,res,next)=>{
 
 module.exports={
     add_item,
+    getAllItem,
     testing
 }

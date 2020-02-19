@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms</title>
+</head>
+
+<body>
+    <h1>Ini Daftar Rooms</h1>
+    <table>
+        <thead>
+            <tr>
+               <th>Nama Barang</th>
+               <th>First Bid</th>
+               <th>Deskripsi</th>
+               <th>Link Room</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% Items_List.forEach(item=>{ %>
+                <tr>
+                    <td><%=item.item_name%></td>
+                    <td><%=item.item_bid%></td>
+                    <td><%=item.item_desc%></td>
+                    <td><a href='/rooms/of/<%=item.id%>'>Masuk</a></td>
+                </tr>
+            <% })%>
+        </tbody>
+    </table>
+    <a href='/user/logged'>Back</a>
+</body>
+
+</html>

@@ -6,6 +6,7 @@ const session = require('express-session')
 const bodyParser = require('body-parser')
 const UserRouter=require('./UserRouter')
 const ItemsRouter=require('./ItemsRouter')
+const RoomsRouter=require('./RoomsRouter')
 
 app.set('view-engine','ejs')
 // router.use(express.urlencoded({extended:false}))
@@ -35,6 +36,8 @@ router.use('/user',UserRouter)
 router.use('/items',ItemsRouter)
 // router.use('/items')
 
+//Redirect Rooms
+router.use('/rooms',RoomsRouter)
 
 // Error Handler
 router.use(notFound)

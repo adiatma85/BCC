@@ -21,7 +21,12 @@ Router.use(express.static(path.join(__dirname,'items')))
 var id
 
 //Get AllItem
-Router.get('/search_for_items')
+Router.get('/search_for_items',ItemsController.getAllItem,(req,res,next)=>{
+    // console.log(res.locals.Items)
+    res.render('items/rooms.ejs',{
+        "Items_List":res.locals.Items
+    })
+})
 
 // Adding Item
 Router.get('/add_items',(req,res,next)=>{
