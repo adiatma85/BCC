@@ -8,6 +8,21 @@ const ItemsController=require('../controller/ItemsController')
 
 const session=require('express-session')
 
+// Pre-CONFIG
+app.use(session({
+    secret:'ssshhh',
+    saveUninitialized: true,
+    resave:true
+}))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended:true
+}))
+app.use(express.static(__dirname+'/views'))
+var sess;
+// After Pre-Config
+
+
 app.set('view-engine','ejs')
 Router.use(express.urlencoded({
     extended:false
@@ -52,6 +67,7 @@ Router.get('/add_items',(req,res,next)=>{
 Router.post('/add_items',(req,res,next)=>{
     delete req.session.Success
     delete req.session.Fail
+    next()
 },ItemsController.add_item)
 
 //Search For Items

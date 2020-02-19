@@ -30,14 +30,15 @@ const get_user= async(req,res,next)=>{
 }
 
 const register_user = async(req,res,next)=>{
+    // console.log('Tested')
     const name=req.body.name
     // const username=req.body.username
     // const NIK=req.body.NIK
     // const usrname=req.body.usrname
     const email=req.body.email
-    const [check]=await db.query('select * from users where email=? AND username=? AND email=? limit 1',[email,usrname,email])
+    // const [check]=await db.query('select * from users where email=? AND username=? AND email=? limit 1',[email,usrname,email])
     
-    // const [check]=await db.query('select * from users where NIK=? AND username=? limit 1',[name,email])
+    const [check]=await db.query('select * from users where NIK=? AND username=? limit 1',[name,email])
     
     if(check.length==0){
         const password=req.body.password
@@ -63,6 +64,7 @@ const register_user = async(req,res,next)=>{
 }
 
 const login_user = async(req, res, next)=>{
+    console.log('In Login_User')
     // const UsrnameOrEmail=req.body.username
     const username=req.body.username
     const user_password=req.body.password

@@ -31,7 +31,7 @@ var sess
 // Page Register_User
 Router.get('/register', (req, res,next)=>{
     if (req.session.Registered){
-        res.render('user/register_form',{
+        res.render('user/register_form.ejs',{
             "Registered":req.session.Registered
         })
     }else{
@@ -41,6 +41,7 @@ Router.get('/register', (req, res,next)=>{
 // POST from Register_User
 Router.post('/register',(req,res,next)=>{
     delete req.session.Registered
+    next()
 },UserController.register_user)
 
 
