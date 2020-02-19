@@ -14,9 +14,9 @@ Router.use(express.urlencoded({
 }))
 Router.use(express.static(path.join(__dirname,'items')))
 
-// const upload = multer({
-//     fileFilter()
-// })
+const upload = multer({
+    dest:'uploads/'
+})
 
 var id
 
