@@ -3,6 +3,7 @@ const app = express()
 const Router=express.Router()
 const bodyParser=require('body-parser')
 const path=require('path')
+const multer=require('multer')
 const ItemsController=require('../controller/ItemsController')
 
 const session=require('express-session')
@@ -12,6 +13,10 @@ Router.use(express.urlencoded({
     extended:false
 }))
 Router.use(express.static(path.join(__dirname,'items')))
+
+// const upload = multer({
+//     fileFilter()
+// })
 
 var id
 
