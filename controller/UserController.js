@@ -73,7 +73,7 @@ const register_user = async(req,res,next)=>{
 }
 
 const login_user = async(req, res, next)=>{
-    console.log('In Login_User')
+    // console.log('In Login_User')
     // const UsrnameOrEmail=req.body.username
     const username=req.body.username
     const user_password=req.body.password

@@ -32,8 +32,14 @@ const getSpecifiedItem= async (req,res,next)=>{
     next()
 }
 
+// De-Activate Rooms
+const deActivateRooms = async (req,res,next)=>{
+    db.query('UPDATE items SET item_status=? WHERE id=?',[1,req.params.id])
+}
+
 
 module.exports={
     testing,
-    getSpecifiedItem
+    getSpecifiedItem,
+    deActivateRooms
 }

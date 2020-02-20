@@ -31,7 +31,7 @@ var sess
 // Page Register_User
 Router.get('/register', (req, res,next)=>{
     if (req.session.Registered){
-        console.log(req.session.Registered.message)
+        // console.log(req.session.Registered.message)
         res.render('user/register_form.ejs',{
             "Registered":req.session.Registered
         })

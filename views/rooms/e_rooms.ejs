@@ -10,6 +10,46 @@
     <p>Item Name: <%=Item_Detail.item_name%></p>
     <p>First Bid: <%=Item_Detail.item_bid%></p>
     <p>Item Desc: <%=Item_Detail.item_desc%></p>
+    <span id="Hour"></span> :
+    <span id="Minutes"></span> :
+    <span id="Seconds"></span>
+    <script>
+        var hours = "<%=Timer.hours%>"
+        var minutes = "<%=Timer.minutes%>"
+        var seconds = "<%=Timer.seconds%>"
+
+        document.getElementById("Hour").innerHTML = hours
+        document.getElementById("Minutes").innerHTML = minutes
+        document.getElementById("Seconds").innerHTML = seconds
+
+        function countdown(){
+           seconds--
+           document.getElementById("Seconds").innerHTML = seconds
+           if(seconds==0){
+                seconds = 60
+                minutes--
+                document.getElementById("Minutes").innerHTML = minutes
+                if (minutes==0){
+                    minutes=60
+                    hours--
+                    document.getElementById("Hour").innerHTML = hours
+                    if (hours==0) {
+                        //STOPING LOOP
+                        stopFunction()
+                    }
+                }
+           } 
+        }
+
+        var looping = setInterval(()=>{
+            countdown()
+        },1000)
+        function stopFunction(){
+            clearInterval(looping)
+            document.location.href = '/rooms/destroy/<%=Item_Detail.id%>'
+        }
+    </script>
+    <br>
     <a href='/items/search_for_items'>Back</a>
 </body>
 </html>
