@@ -31,15 +31,22 @@ var sess
 // Page Register_User
 Router.get('/register', (req, res,next)=>{
     if (req.session.Registered){
+        console.log(req.session.Registered.message)
         res.render('user/register_form.ejs',{
             "Registered":req.session.Registered
         })
     }else{
+        // req.session.Registered={
+        //     type: 'Neutral',
+        //     message: ''
+        // }
         res.render('user/register_form.ejs')
     }
 })
 // POST from Register_User
 Router.post('/register',(req,res,next)=>{
+    // delete req.session.Registered_Success
+    // delete req.session.Registered_Failed
     delete req.session.Registered
     next()
 },UserController.register_user)

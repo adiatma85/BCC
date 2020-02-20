@@ -48,12 +48,21 @@ const register_user = async(req,res,next)=>{
             type:'Success',
             message: 'Welcome to Auxtion'
         }
+        // console.log(req.session.Registered.message)
+        // res.locals.Registered={
+        //     type: 'Success',
+        //     message: 'Welcome to Auxtion'
+        // }
 
     } else {
         req.session.Registered={
             type:'Fail',
             message: 'You are already registered!' 
         }
+        // res.locals.Registered={
+        //     type: 'Fail',
+        //     message: 'You are already registered!'
+        // }
         
         // res.status(409)
         // const error=new Error("Email has already registered")
