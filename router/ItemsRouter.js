@@ -67,8 +67,9 @@ Router.get('/add_items',(req,res,next)=>{
 Router.post('/add_items',(req,res,next)=>{
     delete req.session.Success
     delete req.session.Fail
+    delete req.session.Item
     next()
-},ItemsController.add_item)
+},ItemsController.Uploading,ItemsController.add_item)
 
 //Search For Items
 // Router.get('/search_for_items',(req,res,next)={

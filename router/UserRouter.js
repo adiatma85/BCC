@@ -36,11 +36,13 @@ Router.get('/register', (req, res,next)=>{
             "Registered":req.session.Registered
         })
     }else{
-        // req.session.Registered={
-        //     type: 'Neutral',
-        //     message: ''
-        // }
-        res.render('user/register_form.ejs')
+        req.session.Registered={
+            type: 'Neutral',
+            message: ''
+        }
+        res.render('user/register_form.ejs',{
+            "Registered":req.session.Registered
+        })
     }
 })
 // POST from Register_User

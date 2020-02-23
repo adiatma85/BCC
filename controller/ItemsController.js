@@ -6,6 +6,43 @@ const flash=require('req-flash')
 const bodyParser=require('body-parser')
 const url=require('url')
 const countdown=require('countdown')
+const multer=require('multer')
+const path = require('path')
+
+// Set Storage Device
+const storage = multer.diskStorage({
+    destination: 'uploads/item',
+    filename : (req,file,cb)=>{
+        cb(null,req.session.id_user + '-' + Date.now() + path.extname(file.originalname))
+    }
+})
+
+
+// Init Upload
+
+const upload = multer({
+    storage:storage,
+    limits:{fileSize: 10000000},
+    fileFilter:function(req,file,cb){
+        checkFileType(file,cb)
+    }
+}).single('itemsPhoto')
+
+// CheckingFile
+function checkFileType(file,cb){
+    //Allowed Ext
+    const filetype = /jpeg|jpg|png/
+    //Check Ext
+    const extname = filetype.test(path.extname(file.originalname).toLowerCase())
+    //Check Mime
+    const mimetype = filetype.test(file.mimetype)
+
+    if (mimetype&&extname){
+        return cb (null,true)
+    } else {
+        cb('Error: Images Only!')
+    }
+}
 
 // Pre-CONFIG
 app.use(session({
@@ -80,6 +117,13 @@ const add_item=async (req,res,next)=>{
     })
 }
 
+// UPLOADING
+
+const Uploading= (req,res,next)=>{
+    upload(req,res,next)
+    
+}
+
 const testing=(req,res,next)=>{
     console.log("TESTING")
 }
@@ -95,5 +139,6 @@ const SearchForItem=(req,res,next)=>{
 module.exports={
     add_item,
     getAllItem,
+    Uploading,
     testing
 }

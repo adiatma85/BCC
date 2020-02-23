@@ -81,6 +81,9 @@ const login_user = async(req, res, next)=>{
     // const [check]=await db.query('select * from users where email=?',[email])
     // try {
         const [check]=await db.query('select * from users where username=?',[username])
+        if (check.length==0){
+            return res.redirect('/user/login')
+        }
         const db_password=check[0].password
         const true_pass=bcrypt.compareSync(user_password,db_password)
             if (check.length !=0 && true_pass){
