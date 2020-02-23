@@ -66,6 +66,9 @@ const getAllItem=async (req,res,next)=>{
     next()
 }
 const add_item=async (req,res,next)=>{
+    // console.log(req.session.item_e)
+    // Getting all Data Required
+    const item_file=req.session.item_e.files
     const item_name=req.body.item_name
     const item_desc=req.body.item_desc
     const item_bid=req.body.item_bid
@@ -97,7 +100,7 @@ const add_item=async (req,res,next)=>{
     // After-Date Config
 
     // await db.query('insert into items(date_year, date_month, date_day, date_hour, date_minute, date_second) values(?,?,?,?,?,?)',[obj_date.Year, obj_date.Month, obj_date.Date, dead_Hour, obj_date.Minutes, obj_date.Seconds])
-    await db.query('insert into items(id_user,item_name,item_desc,item_bid,item_status, date_year, date_month, date_day, date_hour, date_minute, date_second) values(?,?,?,?,?,?,?,?,?,?,?)',[id_user,item_name,item_desc,item_bid,0,obj_date.Year, obj_date.Month, obj_date.Date, dead_Hour, obj_date.Minutes, obj_date.Seconds])
+    await db.query('insert into items(id_user,item_name,item_desc,item_bid,item_status, date_year, date_month, date_day, date_hour, date_minute, date_second, item_filename) values(?,?,?,?,?,?,?,?,?,?,?,?)',[id_user,item_name,item_desc,item_bid,0,obj_date.Year, obj_date.Month, obj_date.Date, dead_Hour, obj_date.Minutes, obj_date.Seconds, item_file.filename])
     .then(()=>{
         // req.flash('SuccessAddItem','Barang Anda sudah didaftarkan ke Basis Data.')
         // req.session.Fail.destroy()
@@ -120,7 +123,25 @@ const add_item=async (req,res,next)=>{
 // UPLOADING
 
 const Uploading= (req,res,next)=>{
-    upload(req,res,next)
+    upload(req,res,(err)=>{
+        if (err){
+            req.session.item_e={
+                msg: err
+            }
+        } else{
+            if(req.file == undefined){
+                req.session.item_e={
+                    mgs: 'Error: No File Selected'
+                }
+            } else {
+                req.session.item_e={
+                    msg: 'File Uploaded!',
+                    files: req.file
+                }
+            }
+        }
+        next()
+    },next)
     
 }
 
