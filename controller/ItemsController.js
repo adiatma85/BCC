@@ -11,7 +11,7 @@ const path = require('path')
 
 // Set Storage Device
 const storage = multer.diskStorage({
-    destination: 'uploads/item',
+    destination: 'public/uploads/item',
     filename : (req,file,cb)=>{
         cb(null,req.session.id_user + '-' + Date.now() + path.extname(file.originalname))
     }
@@ -65,10 +65,31 @@ const getAllItem=async (req,res,next)=>{
     res.locals.Items=item_get
     next()
 }
+
+// Detect if there's expired or no
+
+const expiredCheck=async (req,res,next)=>{
+    const [item_get]=await db.query('select * from items WHERE item_status=?',[0])
+    for(i=0;i<item_get.length;i++){
+        var timing=new Date(
+            item_get[i].date_year,
+            item_get[i].date_month,
+            item_get[i].date_day,
+            item_get[i].date_hour,
+            item_get[i].date_minute,
+            item_get[i].date_second
+        )
+        var value=countdown(null,timing)
+        if(value.value <= 0){
+            db.query('UPDATE items SET item_status=? WHERE id=?',[1,item_get[i].id])
+        }
+    }
+    next()
+}
 const add_item=async (req,res,next)=>{
-    // console.log(req.session.item_e)
     // Getting all Data Required
     const item_file=req.session.item_e.files
+    // console.log(item_file.path)
     const item_name=req.body.item_name
     const item_desc=req.body.item_desc
     const item_bid=req.body.item_bid
@@ -140,6 +161,7 @@ const Uploading= (req,res,next)=>{
                 }
             }
         }
+        // console.log(req.session.item_e.files)
         next()
     },next)
     
@@ -161,5 +183,6 @@ module.exports={
     add_item,
     getAllItem,
     Uploading,
+    expiredCheck,
     testing
 }

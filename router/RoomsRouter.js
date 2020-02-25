@@ -13,7 +13,9 @@ app.set('view-engine','ejs')
 Router.use(express.urlencoded({
     extended:false
 }))
-Router.use(express.static(path.join(__dirname,'rooms')))
+// Router.use(express.static(path.join(__dirname,'rooms')))
+// Router.use(express.static('./'))
+// app.use(express.static('./uploads'))
 
 Router.get('/of/:id',RoomsController.getSpecifiedItem,(req,res,next)=>{
     // Fetching Date From Database
@@ -29,7 +31,9 @@ Router.get('/of/:id',RoomsController.getSpecifiedItem,(req,res,next)=>{
     var timer=countdown(null,timing)
     res.render('rooms/e_rooms.ejs',{
         "Item_Detail":res.locals.SpecifiedItem,
-        "Timer":timer
+        "Timer":timer,
+        "Image" : `../../uploads/item/${res.locals.SpecifiedItem.item_filename}`,
+        "Dir":`uploads/item/undefined.JPG`
     })
 })
 

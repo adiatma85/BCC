@@ -17,6 +17,8 @@ app.listen(port,()=>{
 
 
 
+app.use(express.static('./public'))
+
 app.use(express.json())
 
 app.use(bodyParser.json())

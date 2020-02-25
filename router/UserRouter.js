@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
 
 app.set('view-engine','ejs')
 Router.use(express.urlencoded({extended:false}))
-Router.use(express.static(path.join(__dirname,'user')))
+// Router.use(express.static(path.join(__dirname,'user')))
 
 var sess
 

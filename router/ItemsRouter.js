@@ -27,16 +27,16 @@ app.set('view-engine','ejs')
 Router.use(express.urlencoded({
     extended:false
 }))
-Router.use(express.static(path.join(__dirname,'items')))
+// Router.use(express.static(path.join(__dirname,'items')))
 
-const upload = multer({
-    dest:'uploads/'
-})
+// const upload = multer({
+//     dest:'public/uploads/item'
+// })
 
 var id
 
 //Get AllItem
-Router.get('/search_for_items',ItemsController.getAllItem,(req,res,next)=>{
+Router.get('/search_for_items',ItemsController.expiredCheck,ItemsController.getAllItem,(req,res,next)=>{
     // console.log(res.locals.Items)
     res.render('items/rooms.ejs',{
         "Items_List":res.locals.Items
