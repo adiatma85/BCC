@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body{
+                background-image: url("bg1.png");
+            }
+
+            .container{
+                height: 200px;
+                position: relative;
+            }
+
+            .card{
+                margin-top: 35vh;
+                margin-left: auto;
+                margin-right: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              
+                
+            }
+
+
+            .form-inline{
+                padding-bottom: 10px;
+            }
+
+            #login{
+                margin: auto;
+            }
+
+            #username{
+                padding-left: 20px;
+            }
+
+            #pwd{
+                padding-left: 20px;
+            }
+
+            #label1{
+                padding-right: 55px;
+            }
+
+            #label2{
+                padding-right: 10px;
+            }
+
+            #label3{
+                padding-right: 15px;
+            }
+
+        </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- <div class="container"> -->
+        <div class="card" style="width: 23rem;">
+  <div class="card-body">
+    <!-- <h5 class="card-title">Card title</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a> -->
+
+    <form action="Login.html">
+        <div class="form-inline">
+            <label id="label1" for="identity">NIK</label>
+            <input type="text" class="form-control" id="identity" placeholder="Masukkan NIK" name="nik">
+          </div>
+        <div class="form-inline">
+          <label id="label2" for="email">Username</label>
+          <input type="text" class="form-control" id="username" placeholder="Masukkan username" name="email">
+        </div>
+        <div class="form-inline">
+          <label id="label3" for="pwd">Password</label>
+          <input type="password" class="form-control" id="pwd" placeholder="Masukkan password" name="pswd">
+        </div>
+        <button type="submit" id ="daftar" class="btn btn-default">Daftar</button>
+      </form>
+  </div>
+</div>
+</div>
+    </body>
+</html>

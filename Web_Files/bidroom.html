@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style>
+            #navbar2{
+                padding-bottom: 0.01rem;
+                padding-top: 0.01rem;
+                opacity: 0.7;
+            }
+
+            body{
+                background-color: #F9F9F9;
+            }
+
+            #nav1{
+                box-shadow: black;
+            }
+
+            #option{
+                position: absolute;
+                right: 20px;
+            }
+
+            #masukbtn{
+                padding-right: 10px;
+            }
+
+            .container{
+                height: 90vh;
+            }
+
+            .card-img-top{
+                width: 15vw;
+                height: 30vh;
+                object-fit: cover;
+            }
+
+            h2{
+                left: 10px;
+            }
+            
+
+            #item-detail{
+                font-size: 20px;
+            }
+            #price{
+                padding-left: 300px;
+            }
+            #time{
+                padding-left: 300px;
+            }  
+
+            #bid{
+               margin-top: 10px;
+            }
+
+        </style>
+        <script>
+            var initial = 0;
+            initial = hasil.value ;
+            function inc(val){
+                initial += 5000;
+                document.getElementById("hasil").innerHTML=initial;
+            }
+            function dec(val){
+                if(initial==0){
+
+                }else{
+                    initial -= 5000;
+                    document.getElementById("hasil").innerHTML=initial;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <nav id="nav1" class="navbar navbar-expand-sm bg-light navbar-dark">
+            <a class="navbar-brand" href="#">
+                <img src="auxion.png" alt="logo" style="width: 120px;">
+            </a>
+            <form  class="form-inline" action="Login.html">
+                <div id="srch" class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Cari barang" id="src" name="search">
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-primary">Cari</button>
+                    </div>
+                  </div>
+            </form>
+            <div id="option">
+                <a href="Login.html"><button id="masukbtn" type="button" class="btn btn-primary" formaction="Login.html"> Masuk</button></a>
+                <a href="RegisterB.html"><button id="daftarbtn" type="button" class="btn btn-outline-primary" formaction="RegisterB.html">Daftar</button></a>
+            </div>
+        </nav>
+
+        <nav id="navbar2" class="navbar navbar-expand-sm bg-primary navbar-dark ">
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Fashion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Aksesoris</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sepatu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Hobi</a>
+                </li>
+            </ul>
+        </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <img class="card-img-top" src="compas.jpg" alt="Card image">
+                </div>
+                <div class="col-lg-6">
+                    <div id="item-detail">
+                        <h2>Sepatu Compass 2nd baru 1hari</h2><br>
+                        <a id="harga">Harga</a>
+                        <a id="price">Rp. 500.000</a><br>
+                        <a id="waktu">Sisa Waktu</a>
+                        <a id="time">14 Jam</a><br>
+                    </div>
+                    <div id="counter">
+                        <a>Rp. 500000 + </a><span id="hasil">0</span><br>
+                        <button id="kurang" onclick="dec(0)"> - </button>
+                        <button id="tambah" onclick="inc(0)"> + </button>
+                    </div>
+                    <a href="homepage.html"><button id="bid" type="button" class="btn btn-primary" > Pasang </button></a>
+                </div>
+            </div>
+        </div>
+
+        <nav id="navbar3" class="navbar navbar-expand-sm bg-primary navbar-dark ">
+            <div class="collapse navbar-collapse" id="navbarNav2">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Support</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Guide</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Follow Us</a>
+                </li>
+            </ul>
+        </div>
+        </nav>
+    </body>
+</html>
