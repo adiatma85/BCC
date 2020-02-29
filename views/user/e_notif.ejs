@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notif</title>
+</head>
+<body>
+    <%//console.log(notif_data)%>
+    <h1>Room: <%=notif_data.id%></h1>
+    <p>Item Name: <%=notif_data.item_name%></p>
+    <p>Final Bid: <%=notif_data.item_bid%></p>
+    <p>Item Desc: <%=notif_data.item_desc%></p>
+    <img src="<%= typeof image_path !='undefined' ? image_path : ''%>"><br>
+    <a href='/items/payment/<%=notif_data.id%>'><button type="submit">BAYAR SEKARANG!</button></a><br>
+    <a href='/user/notif'>BACK</a>
+</body>
+</html>

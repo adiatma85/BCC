@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register_Form</title>
+</head>
+<body>
+    <h1>INI REGISTER</h1>
+    <% if(Registered) {%>
+        <strong><%= Registered.message %></strong>
+    <% } %>
+    <form action="/user/register" method="POST">
+        <div>
+            <label for="name">NIK</label>
+            <input type="text" name="name" id="name">
+        </div>
+        <!-- <div>
+            <label for="NIK">NIK</label>
+            <input type="text" name="NIK" id="NIK">
+        </div> -->
+        <div>
+            <label for="email">Username</label>
+            <!-- <input type="email" name="email" id="email"> -->
+            <input type="text" name="email" id="email">
+        </div>
+        <!-- <div>
+            <label for="username">Username</label>
+            <input type="text" name="Username" id="Username">
+        </div> -->
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <input type="submit" value="SUBMIT">
+    </form>
+    <a href="/">HOME</a><br>
+    <a href="/user/login">Login</a>
+</body>
+</html>

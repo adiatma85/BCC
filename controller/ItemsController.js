@@ -95,6 +95,7 @@ const add_item=async (req,res,next)=>{
     const item_bid=req.body.item_bid
     const id_user=req.session.id_user
     const dead_time=req.body.Time_Duration // Time-Duration in Hours
+    const category=req.body.Category_List
 
     // Pre-Date Config
     const date_now=new Date()
@@ -106,25 +107,14 @@ const add_item=async (req,res,next)=>{
         "Minutes":date_now.getMinutes(),
         "Seconds":date_now.getSeconds()
     }
-    // console.log(obj_date.Date)
-    // console.log(obj_date.Hours)
     const dead_Hour=obj_date.Hours + Number.parseInt(dead_time)
     
-    const final_time=new Date(
-        obj_date.Year,
-        obj_date.Month,
-        obj_date.Date,
-        dead_Hour,
-        obj_date.Minutes,
-        obj_date.Seconds
-    ) //Send to Database
+     //Send to Database
     // After-Date Config
 
     // await db.query('insert into items(date_year, date_month, date_day, date_hour, date_minute, date_second) values(?,?,?,?,?,?)',[obj_date.Year, obj_date.Month, obj_date.Date, dead_Hour, obj_date.Minutes, obj_date.Seconds])
-    await db.query('insert into items(id_user,item_name,item_desc,item_bid,item_status, date_year, date_month, date_day, date_hour, date_minute, date_second, item_filename) values(?,?,?,?,?,?,?,?,?,?,?,?)',[id_user,item_name,item_desc,item_bid,0,obj_date.Year, obj_date.Month, obj_date.Date, dead_Hour, obj_date.Minutes, obj_date.Seconds, item_file.filename])
+    await db.query('insert into items(id_user,item_name,item_desc,item_bid,item_status, date_year, date_month, date_day, date_hour, date_minute, date_second, item_filename, item_category) values(?,?,?,?,?,?,?,?,?,?,?,?,?)',[id_user,item_name,item_desc,item_bid,0,obj_date.Year, obj_date.Month, obj_date.Date, dead_Hour, obj_date.Minutes, obj_date.Seconds, item_file.filename, category])
     .then(()=>{
-        // req.flash('SuccessAddItem','Barang Anda sudah didaftarkan ke Basis Data.')
-        // req.session.Fail.destroy()
         req.session.Success={
             type:'Success',
             message:'Upload Success!'
@@ -132,7 +122,6 @@ const add_item=async (req,res,next)=>{
         res.redirect('/items/add_items')
     }).catch((err)=>{
         res.status(500)
-        // req.session.Success.destroy()
         req.session.Fail={
             type:'Fail',
             message:'There is error!'
@@ -167,16 +156,34 @@ const Uploading= (req,res,next)=>{
     
 }
 
-const testing=(req,res,next)=>{
-    console.log("TESTING")
+const notification = async (req,res,next)=>{
+    // Get All the item
+    const [check_notif] = await db.query('SELECT * FROM items WHERE item_status=? AND id_rank1=?',[1,req.session.id_user])
+    res.locals.notification = check_notif
+    next()
 }
 
-//After Adding_Item
-
-//SearchForItem
-const SearchForItem=(req,res,next)=>{
-
+const payment = async (req,res,next)=>{
+    // Get The User Now
+    const [this_user] = await db.query('SELECT * FROM users WHERE id=?',[req.session.id_user])
+    // Get The Items
+    const [pay] = await db.query('SELECT * FROM items WHERE id=?',[req.params.id])
+    // Get The Seller
+    const [seller] = await db.query('SELECT * FROM users WHERE id=?',[pay[0].id_user])
+    var user_balance = this_user[0].balance
+    user_balance -= pay[0].item_bid
+    var seller_balance = seller[0].balance
+    seller_balance += pay[0].item_bid
+    // SET THE User Balance
+    await db.query('UPDATE users SET balance=? WHERE id=?',[user_balance,req.session.id_user])
+    // SET THE Seller Balance
+    await db.query('UPDATE users SET balance=? WHERE id=?',[seller_balance,pay[0].id_user])
+    // SET THE Item Itself
+    await db.query('UPDATE items SET item_status=? WHERE id=?',[2,req.params.id])
+    res.redirect('/user/notif')
+    
 }
+
 
 
 module.exports={
@@ -184,5 +191,6 @@ module.exports={
     getAllItem,
     Uploading,
     expiredCheck,
-    testing
+    notification,
+    payment,
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifikasi</title>
+</head>
+<body>
+    <h1>Ini Kumpulan Notifikasi</h1>
+    <table>
+        <thead>
+            <th>Nama Barang</th>
+            <th>Final Bid</th>
+            <th>Deskripsi</th>
+            <th>Kategori</th>
+            <th>Link Room</th>
+        </thead>
+        <tbody>
+            <% notif_data.forEach(notif=>{ %>
+                <tr>
+                    <td><%=notif.item_name%></td>
+                    <td><%=notif.item_bid%></td>
+                    <td><%=notif.item_desc%></td>
+                    <td><%=notif.item_category%></td>
+                    <td><a href='/user/notif/of/<%=notif.id%>'>Detail</a></td>
+                </tr>
+            <% })%>
+        </tbody>
+    </table>
+    <a href='/user/logged'>KEMBALI</a>
+</body>
+</html>

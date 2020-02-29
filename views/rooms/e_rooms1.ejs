@@ -86,15 +86,6 @@
         #option {
             font-size: 17px;
             font-family: 'Montserrat';
-            padding-right: 45px;
-        }
-
-        #logout {
-            color: #777777;
-        }
-
-        #logout:hover {
-            color: #E6675A;
         }
 
         .footer {
@@ -251,15 +242,15 @@
 <body>
     <nav id="nav1" class="navbar navbar-expand-sm">
         <a class="navbar-brand" href="#">
-            <img src="../../../uploads/assets/auxion.png" alt="logo" style="width: 170px;">
+            <img src="../../../uploads/assets/auxion.png" style="width: 170px;">
         </a>
-        <form id="srcbar" class="form-inline" action="Login.html" style="width: 800px;">
+        <form id="srcbar" class="form-inline" action="#" style="width: 800px;">
             <input type="text" class="form-control form-rounded" id="src" placeholder="Cari Barang...">
         </form>
-        <div id="option">
-            <a><label id="masukbtn" type="Text" formaction="Login.html"> USNM</label></a>
-            <a href=#><label id="logout" type="Text" formaction="RegisterB.html">Log Out</label></a>
-        </div>
+        <!-- <div id="option">
+                <a href="Login.html"><label id="masukbtn" type="Text"  formaction="Login.html"> Masuk</label></a>
+                <a href="RegisterB.html"><label id="daftarbtn" type="Text"  formaction="RegisterB.html">Daftar</label></a>
+            </div> -->
     </nav>
 
     <nav id="navbar2" class="navbar navbar-expand-sm">
@@ -288,10 +279,7 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="product-img" style="background-color: black;">
-                        <a href='/user/logged'>
-                            <img src="<%= typeof Image !='undefined' ? Image : '' %>">
-                        </a>
-
+                        <img src="<%= typeof Image !='undefined' ? Image : '' %>">
                     </div>
                 </div>
                 <div class="col-lg-7">
@@ -316,22 +304,7 @@
                             <div class="underline"></div>
                         </div>
                         <div class="row data">
-                            <% if(Id_user != Item_Detail.id_user){%>
-                            <form action="/rooms/bid" method="POST" id="form_bidding">
-                                <p>Pasang Harga : </p>
-                                <input type="number" name="fixed_bid" disabled value="<%=Item_Detail.item_bid%>"
-                                    id="fixed_bid"> +
-                                <input type="number" id="bid" name="user_bid">
-                                <br>
-                                <input type="submit" value="BID!">
-                            </form>
-                            <%}%>
-                        </div>
-                        <div class="row data">
-                            <p>
-                                <%=typeof Message_Bid !='undefined' ? Message_Bid : ''%>
-                            </p>
-                            <!-- <button type="button" class="btn">BID</!--> -->
+                            <button type="button" class="btn">BID</button>
                         </div>
                     </div>
                 </div>

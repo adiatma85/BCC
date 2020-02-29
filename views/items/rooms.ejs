@@ -12,23 +12,39 @@
     <table>
         <thead>
             <tr>
-               <th>Nama Barang</th>
-               <th>First Bid</th>
-               <th>Deskripsi</th>
-               <th>Link Room</th>
+                <th>Nama Barang</th>
+                <th>First Bid</th>
+                <th>Deskripsi</th>
+                <th>Kategori</th>
+                <th>Link Room</th>
             </tr>
         </thead>
         <tbody>
             <% Items_List.forEach(item=>{ %>
-                <tr>
-                    <td><%=item.item_name%></td>
-                    <td><%=item.item_bid%></td>
-                    <td><%=item.item_desc%></td>
-                    <td><a href='/rooms/of/<%=item.id%>'>Masuk</a></td>
-                </tr>
+            <tr>
+                <td><%=item.item_name%></td>
+                <td><%=item.item_bid%></td>
+                <td><%=item.item_desc%></td>
+                <td><%=item.item_category%></td>
+                <td><a href='/rooms/of/<%=item.id%>'>Masuk</a></td>
+            </tr>
             <% })%>
         </tbody>
     </table>
+    <div>
+        <form action='/rooms/category' method="POST">
+            <label for="list_category">Pilih Kategori</label>
+            <input list="category_list" name="Category_List" id="list_category">
+            <datalist id="category_list">
+                <option value="Pakaian">
+                <option value="Sepatu">
+                <option value="Tas">
+                <option value="Aksesories">
+                <option value="Hobi">
+            </datalist>
+            <input type="submit" value="Sortir">
+        </form>
+    </div>
     <a href='/user/logged'>Back</a>
 </body>
 

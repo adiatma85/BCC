@@ -5,8 +5,11 @@ const Router=express.Router()
 const bodyParser=require('body-parser')
 const path=require('path')
 const UserController=require('../controller/UserController')
+const Is_Notif=require('../controller/ItemsController')
 const session=require('express-session')
 // const methodOverride = require('method-override')
+
+const is_data=require('../controller/ItemsController')
 
 // SESSION
 app.set('trust proxy',1)
@@ -57,9 +60,10 @@ Router.post('/register',(req,res,next)=>{
 // RENDER LOGIN
 Router.get('/login',(req,res,next)=>{
     delete req.session.Registered
-    if (req.session.Wrong){
+    if (req.session.WrongMsg){
+        // console.log(req.session.WrongMsg)
         res.render('user/login_form.ejs',{
-            "Wrong":req.session.Wrong
+            "Wrong" : req.session.WrongMsg
         })
     } else {
         res.render('user/login_form.ejs')
@@ -70,7 +74,7 @@ Router.get('/login',(req,res,next)=>{
 Router.post('/login',UserController.login_user)
 
 // If User Logined and Success
-Router.get('/logged',UserController.authenticated,(req,res,next)=>{
+Router.get('/logged',UserController.authenticated,is_data.getAllItem,(req,res,next)=>{
     // console.log(session.id)
     delete req.session.Success
     delete req.session.Failed
@@ -79,19 +83,50 @@ Router.get('/logged',UserController.authenticated,(req,res,next)=>{
     id=req.session.id
     res.render('user/user_page.ejs',{
         "id":id,
-        "usr":usr
+        "usr":usr,
+        item: res.locals.Items
     })
 })
+
+Router.get('/notif',Is_Notif.notification,(req,res,next)=>{
+    // console.log(res.locals.notification)
+    res.render('user/notif.ejs',{
+        notif_data: res.locals.notification
+    })
+})
+
+Router.get('/notif/of/:id',Is_Notif.notification,UserController.getSpecifiedNotif,(req,res,next)=>{
+    res.render('user/e_notif.ejs',{
+        notif_data: res.locals.SpecifiedNotif,
+        image_path: `../../../uploads/item/${res.locals.SpecifiedNotif.item_filename}`
+    })
+})
+
 // GET USER FROM SESSION
 Router.get('/get_user',UserController.get_user)
 
 //Profile User
-Router.get('/profile',(req,res,next)=>{
+Router.get('/profile',UserController.authenticated,(req,res,next)=>{
     res.render('user/user_profile.ejs')
 })
+// Updating Profile User
+Router.post('/profile',UserController.authenticated,
+UserController.Uploading,
+UserController.editUserProfile,
+(req,res,next)=>{
+    res.redirect('/user/profile')
+})
 
-Router.post('/profile',UserController.logged_user,(req,res,next)=>{
-
+// Rendering Page Show to Spesificased User
+Router.get('/of/:id',UserController.authenticated,UserController.getSpecifiedUser,(req,res,next)=>{
+    const data_user=res.locals.getSpecifiedUser.User
+    console.log(data_user)
+    const Aux=res.locals.getSpecifiedUser.Aux
+    console.log(Aux)
+    res.render('user/e_user',{
+        data_user: data_user,
+        Aux: Aux
+    })
 })
 
 // DELETE Session data after Log out

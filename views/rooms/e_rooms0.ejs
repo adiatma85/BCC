@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Each Rooms</title>
+</head>
+
+<body>
+    <% //console.log(RANK) %>
+    <h1>Room: <%=Item_Detail.id%></h1>
+    <p>Item Name: <%=Item_Detail.item_name%> </p>
+    <p>First Bid: <%=Item_Detail.item_bid%> </p>
+    <p>Item Desc: <%=Item_Detail.item_desc%> </p>
+    <span id="Hour"></span> :
+    <span id="Minutes"></span> :
+    <span id="Seconds"></span>
+    <p>
+        <%=typeof Message_Bid !='undefined' ? Message_Bid : ''%>
+    </p>
+    <script>
+        
+    </script>
+    <br>
+    <img src="<%= typeof Image !='undefined' ? Image : '' %>">
+    <% if(Id_user != Item_Detail.id_user){%>
+    <form action="/rooms/bid" method="POST" id="form_bidding">
+        <p>Pasang Harga : </p>
+        <input type="number" name="fixed_bid" disabled value="<%=Item_Detail.item_bid%>" id="fixed_bid"> + 
+        <input type="number" id="bid" name="user_bid">
+        <br>
+        <input type="submit" value="BID!">
+    </form>
+    <%}%>
+    <br>
+
+    <h2>Ranking saat ini</h2>
+    <table>
+        <thead>
+            <th>Nama User</th>
+            <th>Dia Ngebid Berapa</th>
+        </thead>
+        <tbody>
+            <tr id="rank1">
+                <td><%= typeof RANK.Rank1Name[0] != 'undefined' ? RANK.Rank1Name[0].username : '-' %></td>
+                <td><%= typeof RANK.Rank1Bid[0] != 'undefined' ? RANK.Rank1Bid[0].item_bid : '-'%></td>
+                <!-- <td>  <%= //RANK.Rank1Name.length == 0 ? RANK.Rank1Name[0].username : 'BELUM ADA'  %>  </td>
+                <td> <%= //RANK.Rank1Bid.length == 0 ? RANK.Rank1Bid[0].item_bid> : 'BELUM ADA' %> </td> -->
+            </tr>
+            <tr id="rank2">
+                <td><%= typeof RANK.Rank2Name[0] != 'undefined' ? RANK.Rank2Name[0].username : '-' %></td>
+                <td><%= typeof RANK.Rank2Bid[0] != 'undefined' ? RANK.Rank2Bid[0].item_bid : '-'%></td>
+                <!-- <td>  <%= //RANK.Rank2Name.length == 0 ? RANK.Rank2Name[0].username : 'BELUM ADA'  %>  </td>
+                <td> <%= //RANK.Rank2Bid.length == 0 ? RANK.Rank2Bid[0].item_bid> : 'BELUM ADA' %> </td> -->
+            </tr>
+            <tr id="rank3">
+                <td><%= typeof RANK.Rank3Name[0] != 'undefined' ? RANK.Rank3Name[0].username : '-' %></td>
+                <td><%= typeof RANK.Rank3Bid[0] != 'undefined' ? RANK.Rank3Bid[0].item_bid : '-'%></td>
+                <!-- <td>  <%= //RANK.Rank3Name.length == 0 ? RANK.Rank3Name[0].username : 'BELUM ADA'  %>  </td>
+                <td> <%= //RANK.Rank3Bid.length == 0 ? RANK.Rank3Bid[0].item_bid> : 'BELUM ADA' %> </td> -->
+            </tr>
+            <tr id="rank4">
+                <td><%= typeof RANK.Rank4Name[0] != 'undefined' ? RANK.Rank4Name[0].username : '-' %></td>
+                <td><%= typeof RANK.Rank4Bid[0] != 'undefined' ? RANK.Rank4Bid[0].item_bid : '-'%></td>
+                <!-- <td>  <%= //RANK.Rank4Name.length == 0 ? RANK.Rank4Name[0].username : 'BELUM ADA'  %>  </td>
+                <td> <%= //RANK.Rank4Bid.length == 0 ? RANK.Rank4Bid[0].item_bid> : 'BELUM ADA' %> </td> -->
+            </tr>
+            <tr id="rank5">
+                <td><%= typeof RANK.Rank5Name[0] != 'undefined' ? RANK.Rank5Name[0].username : '-' %></td>
+                <td><%= typeof RANK.Rank5Bid[0] != 'undefined' ? RANK.Rank5Bid[0].item_bid : '-'%></td>
+                <!-- <td>  <%= //RANK.Rank5Name.length == 0 ? RANK.Rank5Name[0].username : 'BELUM ADA'  %>  </td>
+                <td> <%= //RANK.Rank5Bid.length == 0 ? RANK.Rank5Bid[0].item_bid> : 'BELUM ADA' %> </td> -->
+            </tr>
+        </tbody>
+    </table>
+    <%if(Categorized){%>
+    <a href="/rooms/category/<%=Categorized[0].item_category%>">Back to Category</a>
+    <% } else { %>
+    <a href='/items/search_for_items'>Back</a>
+    <% } %>
+    <!-- Pre-Script For Countdown -->
+    <script>
+        var hours = "<%=Timer.hours%>"
+        var minutes = "<%=Timer.minutes%>"
+        var seconds = "<%=Timer.seconds%>"
+
+        document.getElementById("Hour").innerHTML = hours
+        document.getElementById("Minutes").innerHTML = minutes
+        document.getElementById("Seconds").innerHTML = seconds
+
+        function countdown() {
+            seconds--
+            document.getElementById("Seconds").innerHTML = seconds
+            if (seconds == 0) {
+                seconds = 60
+                minutes--
+                document.getElementById("Minutes").innerHTML = minutes
+                if (minutes == 0) {
+                    minutes = 60
+                    hours--
+                    document.getElementById("Hour").innerHTML = hours
+                    if (hours == 0) {
+                        //STOPING LOOP
+                        stopFunction()
+                    }
+                }
+            }
+        }
+
+        var looping = setInterval(() => {
+            countdown()
+        }, 1000)
+        function stopFunction() {
+            clearInterval(looping)
+            document.location.href = '/rooms/destroy/<%=Item_Detail.id%>'
+        }
+    </script>
+    <!-- After-Script For Countdown -->
+    <script>
+        // document.getElementById('rank1').innerHTML
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        var socket = io() //calling IO in index.js
+        // $('#form_bidding').submit((e)=>{
+        //     e.preventDefault()
+        //     socket.emit('user_bidding',{
+        //         fixed_bid : $('#fixed_bid').val(),
+        //         user_bid : $('#bid').val(),
+        //         user_id : '<%=Id_user%>',
+        //         item_id : '<%=Item_Detail.id%>'
+        //     })
+        //     $('#bid').val('')
+        //     return false
+        // })
+    </script>
+
+</body>
+
+</html>

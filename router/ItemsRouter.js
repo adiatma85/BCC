@@ -38,6 +38,7 @@ var id
 //Get AllItem
 Router.get('/search_for_items',ItemsController.expiredCheck,ItemsController.getAllItem,(req,res,next)=>{
     // console.log(res.locals.Items)
+    delete req.session.category
     res.render('items/rooms.ejs',{
         "Items_List":res.locals.Items
     })
@@ -70,6 +71,8 @@ Router.post('/add_items',(req,res,next)=>{
     delete req.session.Item
     next()
 },ItemsController.Uploading,ItemsController.add_item)
+
+Router.get('/payment/:id',ItemsController.payment)
 
 //Search For Items
 // Router.get('/search_for_items',(req,res,next)={

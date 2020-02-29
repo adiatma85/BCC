@@ -1,18 +1,461 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User_Page</title>
-</head>
-<body>
-    <h1>Halo <%=usr%></h1>
-    <h1>LOGGED</h1>
-    <a href="/user/profile">PROFILE</a><br>
-    <a href="/user/log_out">LOGOUT</a><br>
-    <a href="/items/add_items">LELANG</a><br>
-    <a href="/items/search_for_items">CARI</a>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Raleway|Ramabhadra&display=swap" rel="stylesheet">
+        <style>
+            html{
+                scroll-behavior: smooth;
+            }
+            body{
+                background-color: #F9F9F9;
+            }
 
-    <!-- Untuk Cari membutuhkan room terlebih dahulu -->
-</body>
+            #option{
+                position: absolute;
+                right: 20px;
+            }
+            .card-img-top{
+                width: 75vh;
+                height: 65vh;
+                object-fit: cover;
+            }
+            h2{
+                left: 10px;
+            }
+
+            #item-detail{
+                font-size: 20px;
+            }
+            #price{
+                padding-left: 300px;
+            }
+            #time{
+                padding-left: 300px;
+            }
+            .navbar {
+                background: #ffffff;
+            }
+            #nav1{
+                box-shadow: 0px 7px 7px -6px rgba(153,153,153,1);
+            }
+            #src{
+                width: 60vw;
+                position: absolute;
+                left: 18%;
+            }   
+            .form-rounded{
+                border-radius: 2rem;
+            }
+            #navbar2{
+                background: #ffffff;
+                opacity: 60%;
+                height: 5vh;
+            }
+            #masukbtn{
+                padding-right: 60px;
+                color: #777777; 
+            }
+            #daftarbtn{
+                padding-right: 60px;
+                color: #777777;
+            }
+            #masukbtn:hover{
+                color: #E6675A; 
+            }
+            #daftarbtn:hover{
+                color: #E6675A;
+            }
+            #option{
+                font-size: 17px;
+                font-family: 'Montserrat';
+                padding-right: 45px;
+            }
+            #logout{
+                color: #777777;
+            }
+            #logout:hover{
+                color: #E6675A;
+            }
+            .footer{
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 10vh;
+                background-color:#ffffff;
+                color:black;
+                box-shadow: 0px -1px 5px 0px rgba(209,209,209,1);   
+            }
+            .nav-link{
+                font-family: 'Montserrat';
+                color: #777777;
+            }
+            .kat{
+                font-family: 'Montserrat';
+                color: #777777;
+                text-align: center;
+                width: 120px;
+            }
+            .kat:hover{
+                color: #E6675A;
+            }
+            .foot{
+                font-family: 'Raleway';
+                color : #E6675A;
+            }
+            .foot:hover{
+                color: rgb(136, 40, 30);
+            }
+            .navbar-nav{
+                text-align: center;
+            }
+            .feet{
+                margin-left: 450px;
+                margin-right: 450px;
+            }
+            .col-lg-3{
+                width: 150px;
+                text-align: center;
+            }
+            .col-lg-2{
+                text-align: center;
+                width: 140px;
+                padding: 10px;
+            }
+            .landing{
+                margin-top: 15px;
+                background: rgb(255,74,55);
+                background: linear-gradient(213deg, rgba(255,74,55,1) 19%, rgba(252,114,76,1) 82%);
+                border-radius: 15px;
+                width: 100%;
+                height: 400px;
+                align-items: center;
+                margin-bottom: 10vh;
+            }
+            .welcome{
+                font-family: 'Ramabhadra';
+                color: white;
+                font-size: 45px;
+                margin: 0;
+                padding: 0;
+            }
+            .wel-1{
+                margin-top: 60px;
+            }
+            .learn:hover{
+                background-color: #cccccc;
+            }
+            .btn{
+                width: 100px;
+                font-size: 20px;
+                font-family: 'Montserrat';
+                background-color: white;
+                color:#E6675A;
+                margin-top: 10px;
+            }
+            .th1{
+                width: 100px;
+                height: 100px;
+                object-fit: contain;
+                text-align: center;
+                margin-left: 73px;
+                margin-top: 23px;
+            }
+            .row{
+                text-align: center;
+                justify-content: center;
+                
+            }
+            .guide{
+                align-content: center;
+                height: 230px;
+                box-shadow: 3px 3px 5px 0px rgba(222,222,222,1);
+            }
+            .col-lg-3{
+                width: 350px;
+            }
+            .guide-title{
+                font-family: 'Ramabhadra';
+                font-size: 39px;
+                margin-left: 19vh;
+            }
+            .guide-title2{
+                font-family: 'Ramabhadra';
+                font-size: 39px;
+                margin-left: 25vh;
+                margin-bottom: 10vh;
+            }
+            .thumbnail{
+                width: 255px;
+                height: 150px;
+                object-fit: cover;
+                overflow: hidden;
+                background-color: #464646;
+            }
+            .item{
+                width: 255px;
+                box-shadow: 3px 3px 5px 0px rgba(222,222,222,1);
+                text-align: left;
+            }
+            .row-prod{
+                margin-top: 30px;
+            }
+            .tes{
+                margin-top: 30px;
+                margin-bottom: 10vh;
+            }
+            .titel{
+                font-family:'Montserrat' ;
+                color: #424242;
+            }
+            .time{
+                font-family: 'Montserrat';
+                color: rgb(119, 119, 119);
+            }
+            .price{
+                font-family: 'Ramabhadra';
+                font-size: 25px;
+                color: #E6675A;
+            }
+            .link{
+                text-decoration: none !important;
+            }
+            .limiter{
+                margin-bottom: 30vh;
+            }
+        </style>
+    </head>
+    <body>
+        <nav id="nav1" class="navbar navbar-expand-sm">
+            <a class="navbar-brand" href="#">
+                <img src="../../uploads/assets/auxion.png" alt="logo" style="width: 170px;">
+            </a>
+            <a href="/user/notif">Notif</a>
+            <form  id="srcbar" class="form-inline" action="Login.html" style="width: 800px;">
+                <input type="text" class="form-control form-rounded" id="src" placeholder="Cari Barang...">
+            </form>
+            <div id="option">
+                <a><label id="masukbtn" type="Text"  formaction="Login.html"><%=usr%></label></a>
+                <a href='/user/log_out'><label id="logout" type="Text"  formaction="RegisterB.html">Log Out</label></a>
+            </div>
+        </nav>
+
+        <nav id="navbar2" class="navbar navbar-expand-sm">
+            <div class="row">
+                <div class="col-lg-2">
+                    <a class="kat nav-link" href="/rooms/category/Pakaian">Fashion</a>
+                </div>
+                <div class="col-lg-2">
+                    <a class="kat nav-link" href="/rooms/category/Aksesories">Aksesoris</a>
+                </div>
+                <div class="col-lg-2">
+                    <a class="kat nav-link" href="/rooms/category/Sepatu">Sepatu</a>
+                </div>
+                <div class="col-lg-2">
+                    <a class="kat nav-link" href="/rooms/category/Tas">Tas</a>
+                </div>
+                <div class="col-lg-2">
+                    <a class="kat nav-link" href="/rooms/category/Hobi">Hobi</a>
+                </div>
+           
+        </div>
+        </nav>
+        <!-- BAGIAN TOP -->
+
+        <div class="container">    
+            <div class="card landing">
+                <p class="welcome wel-1">Punya barang gak dipakai?</p>
+                <p class="welcome">Pengen barang rare murah?</p>
+                <p class="welcome">Cari disini aja!</p>
+                <a href=#guides><button type="button" class="btn learn">Pelajari</button></a>
+            </div>
+        </div>
+
+        <div class="container prods">
+            <a id="guides" class="guide-title" style="color:#E6675A">Dapatkan barang impianmu dalam 3 langkah</a>
+            <div class="row tes">
+                <div class="col-lg-3">
+                    <div class="card guide">
+                        <img class="card-img-top th1" src="../../uploads/assets/guide1.png" >
+                        <div class="card-body">
+                                <h5 class="card-title" style="color: #777777">Cari Barang Kesukaanmu</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card guide">
+                        <img class="card-img-top th1" src="../../uploads/assets/guide2.png" >
+                        <div class="card-body">
+                                <h5 class="card-title" style="color: #777777;">Pasang Harga Sesukamu</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card guide">
+                        <img class="card-img-top th1" src="../../uploads/assets/guide3.png" >
+                        <div class="card-body">
+                                <h5 class="card-title" style="color: #777777">Tunggu dan Menangkan!</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="guide-title2" style="color: #E6675A;">Kurang Stylish? Cek Barang Barang Ini!</a>
+        </div>
+
+        <div class="container">
+            <div class="row row-prod">
+                <div class="col-lg-3">
+                    <a class="link" href='/rooms/of/<%=item[4].id%>'><div class="card item">
+                        <img class="card-img-top thumbnail" src="../uploads/item/<%=item[4].item_filename%>" alt="Card image">
+                        <div class="card-body">
+                          <h4 class="card-title titel"><%=item[4].item_name%></h4>
+                          <p class="card-text price">Rp. <%=item[4].item_bid%></p>
+                          <p class="card-text time">Sisa-Waktu</p>
+                        </div>
+                    </div></a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="link" href='/rooms/of/<%=item[11].id%>'><div class="card item">
+                        <img class="card-img-top thumbnail" src="../uploads/item/<%=item[11].item_filename%>" alt="Card image">
+                        <div class="card-body">
+                          <h4 class="card-title titel"><%=item[11].item_name%></h4>
+                          <p class="card-text price">Rp. <%=item[11].item_bid%></p>
+                          <p class="card-text time">Sisa-Waktu</p>
+                        </div>
+                    </div></a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="link" href='/rooms/of/<%=item[10].id%>'><div class="card item">
+                        <img class="card-img-top thumbnail" src="../uploads/item/<%=item[10].item_filename%>" alt="Card image">
+                        <div class="card-body">
+                          <h4 class="card-title titel"><%=item[10].item_name%></h4>
+                          <p class="card-text price">Rp. <%=item[10].item_bid%></p>
+                          <p class="card-text time">Sisa-Waktu</p>
+                        </div>
+                    </div></a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="link" href='/rooms/of/<%=item[13].id%>'><div class="card item">
+                        <img class="card-img-top thumbnail" src="../uploads/item/<%=item[13].item_filename%>" alt="Card image">
+                        <div class="card-body">
+                          <h4 class="card-title titel"><%=item[13].item_name%></h4>
+                          <p class="card-text price">Rp. <%=item[13].item_bid%></p>
+                          <p class="card-text time">Sisa-Waktu</p>
+                        </div>
+                    </div></a>
+                </div>
+            </div>
+
+            <div class="row row-prod">
+                <div class="col-lg-3">
+                    <a class="link" href='/rooms/of/<%=item[5].id%>'><div class="card item">
+                        <img class="card-img-top thumbnail" src="../uploads/item/<%=item[5].item_filename%>" alt="Card image">
+                        <div class="card-body">
+                          <h4 class="card-title titel"><%=item[5].item_name%></h4>
+                          <p class="card-text price">Rp. <%=item[5].item_bid%></p>
+                          <p class="card-text time">Sisa-Waktu</p>
+                        </div>
+                    </div></a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="link" href='/rooms/of/<%=item[9].id%>'><div class="card item">
+                        <img class="card-img-top thumbnail" src="../uploads/item/<%=item[9].item_filename%>" alt="Card image">
+                        <div class="card-body">
+                          <h4 class="card-title titel"><%=item[9].item_name%></h4>
+                          <p class="card-text price">Rp. <%=item[9].item_bid%></p>
+                          <p class="card-text time">Sisa-Waktu</p>
+                        </div>
+                    </div></a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="link" href='/rooms/of/<%=item[2].id%>'><div class="card item">
+                        <img class="card-img-top thumbnail" src="../uploads/item/<%=item[2].item_filename%>" alt="Card image">
+                        <div class="card-body">
+                          <h4 class="card-title titel"><%=item[2].item_name%></h4>
+                          <p class="card-text price">Rp. <%=item[2].item_bid%></p>
+                          <p class="card-text time">Sisa Waktu</p>
+                        </div>
+                    </div></a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="link" href='/rooms/of/<%=item[6].id%>'><div class="card item">
+                        <img class="card-img-top thumbnail" src="../uploads/item/<%=item[6].item_filename%>" alt="Card image">
+                        <div class="card-body">
+                          <h4 class="card-title titel"><%=item[6].item_name%></h4>
+                          <p class="card-text price">Rp. <%=item[6].item_bid%></p>
+                          <p class="card-text time">Sisa-Waktu</p>
+                        </div>
+                    </div></a>
+                </div>
+            </div>
+
+            <div class="row row-prod">
+                <div class="col-lg-3">
+                    <a class="link" href='/rooms/of/<%=item[8].id%>'><div class="card item">
+                        <img class="card-img-top thumbnail" src="../uploads/item/<%=item[8].item_filename%>" alt="Card image">
+                        <div class="card-body">
+                          <h4 class="card-title titel"><%=item[8].item_name%></h4>
+                          <p class="card-text price">Rp. <%=item[8].item_bid%></p>
+                          <p class="card-text time">Sisa-Waktu</p>
+                        </div>
+                    </div></a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="link" href='/rooms/of/<%=item[3].id%>'><div class="card item">
+                        <img class="card-img-top thumbnail" src="../uploads/item/<%=item[3].item_filename%>" alt="Card image">
+                        <div class="card-body">
+                          <h4 class="card-title titel"><%=item[3].item_name%></h4>
+                          <p class="card-text price">Rp. <%=item[3].item_bid%></p>
+                          <p class="card-text time">Sisa-Waktu</p>
+                        </div>
+                    </div></a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="link" href='/rooms/of/<%=item[12].id%>'><div class="card item">
+                        <img class="card-img-top thumbnail" src="../uploads/item/<%=item[12].item_filename%>" alt="Card image">
+                        <div class="card-body">
+                          <h4 class="card-title titel"><%=item[12].item_name%></h4>
+                          <p class="card-text price">Rp. <%=item[12].item_bid%></p>
+                          <p class="card-text time">Sisa-Waktu</p>
+                        </div>
+                    </div></a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="link" href='/rooms/of/<%=item[7].id%>'><div class="card item">
+                        <img class="card-img-top thumbnail" src="../uploads/item/<%=item[7].item_filename%>" alt="Card image">
+                        <div class="card-body">
+                          <h4 class="card-title titel"><%=item[7].item_name%></h4>
+                          <p class="card-text price">Rp. <%=item[7].item_bid%></p>
+                          <p class="card-text time">Sisa-Waktu</p>
+                        </div>
+                    </div></a>
+                </div>
+            </div>
+            </div>
+
+            <div class="limiter"></div>
+
+
+        <!-- BAGIAN FOOTER -->
+        <nav id="navbar3" class="footer navbar navbar-expand-sm">
+            <div class="container feet">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <a class="foot nav-link" href="#">Support</a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a class="foot nav-link" href="#">Guide</a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a class="foot nav-link" href="#">About Us</a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a class="foot nav-link" href="#">Follow Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </nav>
+    </body>
 </html>

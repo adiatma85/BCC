@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login_Form</title>
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+</head>
+<body>
+    <%= typeof Wrong != 'undefined' ? Wrong : '' %>
+    <h1 class="header">INI LOGIN</h1>
+    <form action="/user/login" method="POST">
+        <div>
+            <label for="Username">Username</label>
+            <input type="text" name="username" id="Username">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <input type="submit" value="SUBMIT">
+    </form>
+    <!-- <form action="" id="chat">
+        <div>
+            <label for="chat_text">MENCOBA</label>
+            <input type="text" id="chat_text">
+        </div>
+        <input type="submit" value="TESTING">
+    </form> -->
+    <a href="/">HOME</a><br>
+    <a href="/user/register">Register</a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        var socket = io() //calling IO in index.js
+        // if ("<%Wrong%>") {
+        //     alert("<%=Wrong%>")
+        // }
+        // $(()=>{
+            // $('#chat').submit((e)=>{
+            //     e.preventDefault()
+            //     console.log($('#chat_text').val())
+            //     socket.emit('message', $('#chat_text').val())
+            //     $('#chat_text').val('')
+            //     return false
+            // })
+        // })
+    </script>
+</body>
+</html>

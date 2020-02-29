@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categoru Rooms</title>
+</head>
+<body>
+    <h1>Kategori: <%=Category_Name%></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nama Barang</th>
+                <th>First Bid</th>
+                <th>Deskripsi</th>
+                <th>Kategori</th>
+                <th>Link Room</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% Categorized_Items.forEach(item=>{ %>
+                <tr>
+                    <td><%=item.item_name%></td>
+                    <td><%=item.item_bid%></td>
+                    <td><%=item.item_desc%></td>
+                    <td><%=item.item_category%></td>
+                    <td><a href='/rooms/of/<%=item.id%>'>Masuk</a></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+        <a href='/items/search_for_items'>Kembali</a>
+</body>
+</html>
